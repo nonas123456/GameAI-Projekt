@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 708018663}
   - component: {fileID: 708018662}
   - component: {fileID: 708018661}
+  - component: {fileID: 708018665}
   m_Layer: 0
   m_Name: TempMisile
   m_TagString: Untagged
@@ -497,6 +498,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &708018665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708018660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e4f87e9570b89429aa986d647423f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissileMovement
+  currentTile: {fileID: 0}
+  PlayerScript: {fileID: 0}
+  CurrentPlayerTile: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +574,7 @@ GameObject:
   - component: {fileID: 1323238138}
   - component: {fileID: 1323238137}
   - component: {fileID: 1323238136}
+  - component: {fileID: 1323238139}
   m_Layer: 0
   m_Name: TempPlayer
   m_TagString: Untagged
@@ -574,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 1323238134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -658,6 +675,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323238134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1323238139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323238134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308737129173ad4690ff81dd93b1f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
+  CurrentTile: {fileID: 0}
 --- !u!1 &1953245919
 GameObject:
   m_ObjectHideFlags: 0
