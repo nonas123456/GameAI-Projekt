@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissileMovement
   currentTile: {fileID: 0}
-  PlayerScript: {fileID: 0}
+  PlayerScript: {fileID: 1323238139}
   CurrentPlayerTile: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
@@ -771,6 +771,10 @@ PrefabInstance:
     - target: {fileID: 688075623953538631, guid: c0180a1437bbd9242bac93392072ae52, type: 3}
       propertyPath: m_Name
       value: GridHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603881788206770723, guid: c0180a1437bbd9242bac93392072ae52, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
