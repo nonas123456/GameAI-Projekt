@@ -395,7 +395,6 @@ GameObject:
   - component: {fileID: 708018663}
   - component: {fileID: 708018662}
   - component: {fileID: 708018661}
-  - component: {fileID: 708018665}
   m_Layer: 0
   m_Name: TempMisile
   m_TagString: Untagged
@@ -491,28 +490,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708018660}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 50, y: 1.4, z: -50}
-  m_LocalScale: {x: 1.4, y: 2, z: 1.4}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4, y: 2, z: 1.3999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2024686877}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &708018665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708018660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e4f87e9570b89429aa986d647423f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissileMovement
-  currentTile: {fileID: 0}
-  PlayerScript: {fileID: 1323238139}
-  CurrentPlayerTile: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +704,54 @@ Transform:
   - {fileID: 1323238135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2024686875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024686877}
+  - component: {fileID: 2024686876}
+  m_Layer: 0
+  m_Name: MissileHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2024686876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024686875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e4f87e9570b89429aa986d647423f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissileMovement
+  currentTile: {fileID: 0}
+  PlayerScript: {fileID: 1323238139}
+  CurrentPlayerTile: {fileID: 0}
+--- !u!4 &2024686877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024686875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50, y: 1.4, z: -50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 708018664}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8692674006876992392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -790,4 +822,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 8692674006876992392}
   - {fileID: 1953245920}
-  - {fileID: 708018664}
+  - {fileID: 2024686877}

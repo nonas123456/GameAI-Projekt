@@ -3,6 +3,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.VectorGraphics;
 using UnityEditor;
 
 public class MissileMovement : MonoBehaviour
@@ -13,7 +15,7 @@ public class MissileMovement : MonoBehaviour
     public PlayerScript PlayerScript;
     [SerializeField] private GameObject CurrentPlayerTile;
     private GameObject previousPlayerTile;
-
+    
     private Stack<AstarNode> path;
     private int speed = 10;
     
@@ -44,22 +46,43 @@ public class MissileMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (path != null)
+        if (path != null && path.Count > 0)
         {
             Vector3 moveTo = path.Peek().node.transform.position;
             moveTo.y = transform.position.y;
             transform.position = Vector3.MoveTowards(transform.position, moveTo, Time.deltaTime * speed);
+            transform.LookAt(moveTo);
+            print(transform.rotation.eulerAngles);
             if (transform.position == moveTo)
             {
                 path.Pop();
             }
         }
+
+        if (path.Count <= 0)
+        {
+            print("Destination reached");
+        }
     }
 
-    private float Heuristic(GridNode current, GridNode target)
-    {
+    private float Heuristic(GridNode current, GridNode target, Vector3 targetDirection, Vector3 currentDirection)
+    { 
+        float penalty;
        float distance = Vector3.Distance(current.gameObject.transform.position, target.gameObject.transform.position);
-       return distance;
+       if (currentDirection == targetDirection)
+       {
+           penalty = 0;
+       }
+       else if (currentDirection == (-1 * targetDirection))
+       {
+           penalty = 1;
+       }
+       else
+       {
+           penalty = 0.5f;
+       }
+       
+       return distance + (penalty * 10);
     }
     
     private class AstarNode
@@ -68,13 +91,15 @@ public class MissileMovement : MonoBehaviour
         public float h;
         public AstarNode parent;
         public GridNode node;
+        public Vector3 direction;
 
-        public AstarNode(float g, float h, AstarNode parent, GridNode node)
+        public AstarNode(float g, float h, AstarNode parent, GridNode node, Vector3 direction)
         {
             this.g = g;
             this.h = h;
             this.parent = parent;
             this.node = node;
+            this.direction = direction;   
         }
 
     }
@@ -83,9 +108,9 @@ public class MissileMovement : MonoBehaviour
     {
         AstarNode current;
         
-        
         List<AstarNode> queue = new List<AstarNode>();
-        queue.Add(new AstarNode(0, Heuristic(start, target), null, start));
+        
+        queue.Add(new AstarNode(0, Heuristic(start, target, gameObject.transform.forward, gameObject.transform.forward), null, start, gameObject.transform.forward));
         
         while (queue.Count > 0)
         {
@@ -109,15 +134,17 @@ public class MissileMovement : MonoBehaviour
                 AstarNode neighborAstar = IsPresent(neighbor, queue);
                 if (neighborAstar == null)
                 {
-                    neighborAstar = new AstarNode(current.g + 10, Heuristic(neighbor, target), current, neighbor );
+                    Vector3 neighborDirection = (neighbor.gameObject.transform.position - current.node.gameObject.transform.position).normalized;
+                    neighborAstar = new AstarNode(current.g + Heuristic(neighbor, current.node, neighborDirection, current.direction), Heuristic(neighbor, target, neighborDirection, current.direction), current, neighbor, neighborDirection );
                     queue.Add(neighborAstar);
                 }
                 else
                 {
-                    if ((current.g + 10) < neighborAstar.g)
+                    if ((current.g + Heuristic(neighbor, current.node, neighborAstar.direction, current.direction)) < neighborAstar.g)
                     {
                       neighborAstar.parent = current;
-                      neighborAstar.g = current.g + 10;
+                      neighborAstar.direction = (neighbor.gameObject.transform.position - current.node.gameObject.transform.position).normalized;
+                      neighborAstar.g = current.g + Heuristic(neighbor, current.node, neighborAstar.direction, current.direction);
                     }
                 }
             }
